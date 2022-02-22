@@ -1,13 +1,22 @@
 import React, { useState } from 'react';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
+import Dialog from '@mui/material/Dialog';
+import DialogContent from '@mui/material/DialogContent';
+import DialogContentText from '@mui/material/DialogContentText';
+import DialogTitle from '@mui/material/DialogTitle';
 import Grid from '@mui/material/Grid';
+import IconButton from '@mui/material/IconButton';
 import Toolbar from '@mui/material/Toolbar';
 import Typography from '@mui/material/Typography';
 import axios from 'axios';
 import ProvidersTable from './ProvidersTable';
 import SearchForm from './SearchForm';
 import { MapContainer, Marker, Popup, TileLayer } from 'react-leaflet'
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import GitHubIcon from '@mui/icons-material/GitHub';
+import InfoIcon from '@mui/icons-material/Info';
+
 import L from 'leaflet';
 
 // This is neccesary to make Leaflet markers work.
@@ -24,8 +33,17 @@ const defaultEspecialidad = 1076;
 function App() {
 
   const [loading, setLoading] = useState(false);
+  const [aboutOpen, setAboutOpen] = useState(false);
   const [especialidad, setEspecialidad] = useState(defaultEspecialidad);
   const [providers, setProviders] = useState([]);
+
+  function handleAboutClick() {
+    setAboutOpen(true);
+  }
+
+  function handleAboutClose() {
+    setAboutOpen(false);
+  }
 
   function postData() {
     setLoading(true);
@@ -49,6 +67,22 @@ function App() {
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
             OSPJN Mapa
           </Typography>
+          <IconButton
+            size="large"
+            color="inherit"
+            onClick={handleAboutClick}
+          >
+            <InfoIcon />
+          </IconButton>
+          <IconButton
+            size="large"
+            color="inherit"
+            rel="noopener"
+            href="https://github.com/JuanQP/ospjn-mapa"
+            target="_blank"
+          >
+            <GitHubIcon />
+          </IconButton>
         </Toolbar>
       </AppBar>
       <Container sx={{marginTop: 2}}>
@@ -96,6 +130,22 @@ function App() {
             <ProvidersTable providers={providers}/>
           </Grid>
         </Grid>
+        <Dialog
+          open={aboutOpen}
+          onClose={handleAboutClose}
+          aria-labelledby="alert-dialog-title"
+          aria-describedby="alert-dialog-description"
+        >
+          <DialogTitle id="alert-dialog-title">
+            OSPJN Mapa
+          </DialogTitle>
+          <DialogContent>
+            <DialogContentText id="alert-dialog-description">
+              <p><span>Hecho con </span><FavoriteIcon fontSize="small" color="secondary"/></p>
+              <p>Toda la información usada en esta página es información pública.</p>
+            </DialogContentText>
+          </DialogContent>
+        </Dialog>
       </Container>
     </>
   );
