@@ -47,8 +47,8 @@ function App() {
 
   function postData() {
     setLoading(true);
-    axios.post('/api/data', {especialidad}).then(response => {
-      setProviders(response.data.documents)
+    axios.post('/api/providers', {especialidad}).then(response => {
+      setProviders(response.data.documents);
     }).catch(error => {
       console.log(error)
     }).finally(() => {
