@@ -8,6 +8,7 @@
   },
   "scripts": {
     "start": "node api/index.js",
+    "frontend": "cd frontend && npm run dev",
     "build": "cd frontend && npm install && npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },

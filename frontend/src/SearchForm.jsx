@@ -1,8 +1,8 @@
+import Grid from '@mui/material/Unstable_Grid2';
 import LoadingButton from '@mui/lab/LoadingButton';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
-import Stack from '@mui/material/Stack';
 import SearchIcon from '@mui/icons-material/Search';
 
 const especialidades = [
@@ -219,31 +219,38 @@ function SearchForm({loading, defaultEspecialidad, onEspecialidadChange, onSearc
   }
 
   return (
-    <Stack direction="column" alignItems="center" justifyContent="center" spacing={2}>
-      <FormControl>
-        <InputLabel variant="standard" htmlFor="especialidades">
-          Especialidad
-        </InputLabel>
-        <NativeSelect
-          onChange={handleSelectChange}
-          defaultValue={defaultEspecialidad}
-          inputProps={{
-            name: 'especialidades',
-            id: 'especialidades',
-          }}
+    <Grid container>
+      <Grid xs={0} md />
+      <Grid xs={12} md={6}>
+        <FormControl fullWidth>
+          <InputLabel variant="standard" htmlFor="especialidades">
+            Especialidad
+          </InputLabel>
+          <NativeSelect
+            onChange={handleSelectChange}
+            defaultValue={defaultEspecialidad}
+            inputProps={{
+              name: 'especialidades',
+              id: 'especialidades',
+            }}
+          >
+            {especialidades.map(e => <option key={e.id} value={e.id}>{e.label}</option> )}
+          </NativeSelect>
+        </FormControl>
+      </Grid>
+      <Grid xs={12} md={3}>
+        <LoadingButton
+          fullWidth
+          startIcon={<SearchIcon />}
+          variant="contained"
+          loading={loading}
+          onClick={handleSearchClick}
         >
-          {especialidades.map(e => <option key={e.id} value={e.id}>{e.label}</option> )}
-        </NativeSelect>
-      </FormControl>
-      <LoadingButton
-        startIcon={<SearchIcon />}
-        variant="contained"
-        loading={loading}
-        onClick={handleSearchClick}
-      >
-        Buscar
-      </LoadingButton>
-    </Stack>
+          Buscar
+        </LoadingButton>
+      </Grid>
+      <Grid xs={0} md />
+    </Grid>
   )
 }
 
