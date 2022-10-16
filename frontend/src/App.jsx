@@ -19,12 +19,15 @@ import InfoIcon from '@mui/icons-material/Info';
 
 import L from 'leaflet';
 
+import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
+import iconMarker from 'leaflet/dist/images/marker-icon.png';
+import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 // This is neccesary to make Leaflet markers work.
 delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
-    iconRetinaUrl: require('leaflet/dist/images/marker-icon-2x.png'),
-    iconUrl: require('leaflet/dist/images/marker-icon.png'),
-    shadowUrl: require('leaflet/dist/images/marker-shadow.png')
+    iconRetinaUrl: iconRetina,
+    iconUrl: iconMarker,
+    shadowUrl: markerShadow,
 });
 
 const initialPosition = [-34.6210017,-58.4046389];
