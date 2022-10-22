@@ -44,10 +44,6 @@ function ProvidersTable({providers}) {
                 </Badge>
               </Box>
             </TableCell>
-            {/* Empty cells to fill header row */}
-            <TableCell />
-            <TableCell />
-            <TableCell />
           </TableRow>
         </TableHead>
         <TableBody>
