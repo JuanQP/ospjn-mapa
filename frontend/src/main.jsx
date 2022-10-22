@@ -10,7 +10,6 @@ import 'leaflet/dist/leaflet.css';
 import 'leaflet/dist/images/marker-icon.png';
 import 'leaflet/dist/images/marker-shadow.png';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import { Helmet } from "react-helmet";
 
 const theme = createTheme({
   palette: {
@@ -26,9 +25,6 @@ const theme = createTheme({
 ReactDOM.render(
   <React.StrictMode>
     <ThemeProvider theme={theme}>
-      <Helmet>
-        <meta name="theme-color" content={theme.palette.primary.main} />
-      </Helmet>
       <App />
     </ThemeProvider>
   </React.StrictMode>,
