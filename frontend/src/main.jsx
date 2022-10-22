@@ -14,10 +14,10 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 const theme = createTheme({
   palette: {
     primary: {
-      main: '#85586c',
+      main: '#a36a80',
     },
     secondary: {
-      main: '#00c9b7',
+      main: '#db9eb5',
     },
   },
 });
