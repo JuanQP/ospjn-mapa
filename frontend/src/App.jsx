@@ -3,23 +3,24 @@ import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
 import axios from 'axios';
-import ProvidersTable from './ProvidersTable';
-import SearchForm from './SearchForm';
 import GitHubIcon from '@mui/icons-material/GitHub';
 import InfoIcon from '@mui/icons-material/Info';
-import { Map } from './Map';
-import { OSPJNAppBar } from './OSPJNAppBar';
-import { AboutModal } from './AboutModal';
+import { AboutModal } from './components/AboutModal';
+import { Map } from './components/Map/Map';
+import { OSPJNAppBar } from './components/OSPJNAppBar';
+import ProvidersTable from './components/ProvidersTable/ProvidersTable';
+import SearchForm from './components/SearchForm';
 
-const initialPosition = [-34.6210017,-58.4046389];
-const defaultEspecialidad = 1076;
+const INITIAL_POSITION = [-34.6210017,-58.4046389];
+const DEFAULT_ESPECIALIDAD = 1076;
 const GITHUB_URL="https://github.com/JuanQP/ospjn-mapa";
+const PROVIDERS_URL = '/api/providers';
 
 function App() {
 
   const [loading, setLoading] = useState(false);
   const [aboutOpen, setAboutOpen] = useState(false);
-  const [especialidad, setEspecialidad] = useState(defaultEspecialidad);
+  const [especialidad, setEspecialidad] = useState(DEFAULT_ESPECIALIDAD);
   const [providers, setProviders] = useState([]);
   const appBarButtons = [
     {Icon: InfoIcon, onClick: handleAboutClick},
@@ -36,7 +37,7 @@ function App() {
 
   function postData() {
     setLoading(true);
-    axios.post('/api/providers', {especialidad}).then(response => {
+    axios.post(PROVIDERS_URL, {especialidad}).then(response => {
       setProviders(response.data.documents);
     }).catch(error => {
       console.log(error);
@@ -63,13 +64,13 @@ function App() {
           <Grid xs={12}>
             <SearchForm
               loading={loading}
-              defaultEspecialidad={defaultEspecialidad}
+              defaultEspecialidad={DEFAULT_ESPECIALIDAD}
               onEspecialidadChange={handleEspecialidadChange}
               onSearchClick={postData}
             />
           </Grid>
           <Grid xs={12}>
-            <Map initialPosition={initialPosition} providers={providers} />
+            <Map initialPosition={INITIAL_POSITION} providers={providers} />
           </Grid>
           <Grid xs={12}>
             <ProvidersTable providers={providers}/>
