@@ -63,9 +63,10 @@ app.use(express.json());
 // Have Node serve the files for our built React app
 app.use(express.static(path.resolve(__dirname, '../frontend/dist')));
 
-app.post('/api/providers', async (req, res) => {
+app.get('/api/providers', async (req, res) => {
+
   const providers = await Provider.find({
-    "listaEspecialidades.especialidad.id": req.body.especialidad,
+    "listaEspecialidades.especialidad.id": Number(req.query.especialidad),
   });
   res.status(200).send({
     documents: providers,

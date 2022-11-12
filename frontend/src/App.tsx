@@ -7,13 +7,12 @@ import InfoIcon from '@mui/icons-material/Info';
 import AppBar from '@mui/material/AppBar';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Unstable_Grid2';
-import axios from 'axios';
 import { useState } from 'react';
+import * as api from './api';
 
 const INITIAL_POSITION: [number, number] = [-34.6210017,-58.4046389];
 const DEFAULT_ESPECIALIDAD = 1076;
 const GITHUB_URL="https://github.com/JuanQP/ospjn-mapa";
-const PROVIDERS_URL = '/api/providers';
 
 function App() {
   const [loading, setLoading] = useState(false);
@@ -33,15 +32,16 @@ function App() {
     setAboutOpen(false);
   }
 
-  function postData() {
+  async function getData() {
     setLoading(true);
-    axios.post(PROVIDERS_URL, {especialidad}).then(response => {
-      setProviders(response.data.documents);
-    }).catch(error => {
+    try {
+      const providers = await api.getProviders(especialidad);
+      setProviders(providers);
+    } catch (error) {
       console.log(error);
-    }).finally(() => {
+    } finally {
       setLoading(false);
-    });
+    }
   }
 
   function handleEspecialidadChange(value: number) {
@@ -64,7 +64,7 @@ function App() {
               loading={loading}
               defaultEspecialidad={DEFAULT_ESPECIALIDAD}
               onEspecialidadChange={handleEspecialidadChange}
-              onSearchClick={postData}
+              onSearchClick={getData}
             />
           </Grid>
           <Grid xs={12}>
