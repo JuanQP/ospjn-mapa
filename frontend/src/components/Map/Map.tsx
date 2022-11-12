@@ -1,19 +1,26 @@
-import { MapContainer, TileLayer } from "react-leaflet";
+import { hasLatLong } from '@/helpers';
 import L from 'leaflet';
 import iconRetina from 'leaflet/dist/images/marker-icon-2x.png';
 import iconMarker from 'leaflet/dist/images/marker-icon.png';
 import markerShadow from 'leaflet/dist/images/marker-shadow.png';
 import React from "react";
+import { MapContainer, TileLayer } from "react-leaflet";
 import { DomicilioMarker } from "./DomicilioMarker";
 // This is neccesary to make Leaflet markers work.
-delete L.Icon.Default.prototype._getIconUrl;
+// delete L.Icon.Default.prototype._getIconUrl;
 L.Icon.Default.mergeOptions({
     iconRetinaUrl: iconRetina,
     iconUrl: iconMarker,
     shadowUrl: markerShadow,
 });
 
-export function Map({ initialPosition, providers }) {
+interface Props {
+  initialPosition: [number, number];
+  providers: Provider[];
+}
+
+export function Map({ initialPosition, providers }: Props) {
+
   return (
     <MapContainer
       center={initialPosition}
@@ -30,7 +37,7 @@ export function Map({ initialPosition, providers }) {
       />
       {providers.map((p, i) => (
         <React.Fragment key={i}>
-        {p.listaDomicilios.filter(d => d.latitud && d.longitud).map((d, j) => (
+        {p.listaDomicilios.filter(hasLatLong).map((d, j) => (
           <DomicilioMarker key={`domicilio-${j}`} provider={p} domicilio={d} />
         ))}
         </React.Fragment>

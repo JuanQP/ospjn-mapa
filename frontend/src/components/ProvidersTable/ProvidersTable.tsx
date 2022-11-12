@@ -1,28 +1,28 @@
-import { useState } from 'react';
+import PersonIcon from '@mui/icons-material/Person';
+import { Box } from '@mui/material';
 import Badge from '@mui/material/Badge';
+import Paper from '@mui/material/Paper';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
-import PersonIcon from '@mui/icons-material/Person';
 import Typography from '@mui/material/Typography';
-import { ProvidersTableRow } from './ProvidersTableRow.jsx';
-import { Box } from '@mui/material';
-import { ProviderDetailsModal } from './ProviderDetailsModal.jsx';
+import { useState } from 'react';
+import { ProviderDetailsModal } from './ProviderDetailsModal.js';
+import { ProvidersTableRow } from './ProvidersTableRow.js';
 
-function ProvidersTable({providers}) {
+interface Props {
+  providers: Provider[];
+}
+
+export function ProvidersTable({ providers }: Props) {
 
   const [open, setOpen] = useState(false);
-  const [selectedProvider, setSelectedProvider] = useState({
-    nombre: "",
-    listaEspecialidades: [],
-    listaDomicilios: [],
-  });
+  const [selectedProvider, setSelectedProvider] = useState<Provider>();
 
-  function handleClickOpen(provider) {
+  function handleClickOpen(provider: Provider) {
     setSelectedProvider(provider);
     setOpen(true);
   };
@@ -56,13 +56,13 @@ function ProvidersTable({providers}) {
           ))}
         </TableBody>
       </Table>
-      <ProviderDetailsModal
-        open={open}
-        provider={selectedProvider}
-        onClose={handleClose}
-      />
+      {selectedProvider && (
+        <ProviderDetailsModal
+          open={open}
+          provider={selectedProvider}
+          onClose={handleClose}
+        />
+      )}
     </TableContainer>
   )
 }
-
-export default ProvidersTable;

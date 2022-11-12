@@ -1,6 +1,7 @@
 import { AppBar, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBarButton } from "./types";
 
-function toIconButton(button, index) {
+function toIconButton(button: AppBarButton, index: number) {
   const { Icon, ...buttonProps } = button;
   return (
     <IconButton
@@ -14,7 +15,11 @@ function toIconButton(button, index) {
   )
 }
 
-export function OSPJNAppBar({ buttons = [] }) {
+interface Props {
+  buttons: AppBarButton[];
+}
+
+export function OSPJNAppBar({ buttons }: Props) {
 
   return (
     <AppBar position="relative">

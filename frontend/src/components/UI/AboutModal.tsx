@@ -1,7 +1,12 @@
-import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 import FavoriteIcon from '@mui/icons-material/Favorite';
+import { Dialog, DialogContent, DialogContentText, DialogTitle } from "@mui/material";
 
-export function AboutModal({ open, onClose }) {
+interface Props {
+  open: boolean;
+  onClose: () => void;
+}
+
+export function AboutModal({ open, onClose }: Props) {
   return (
     <Dialog
       open={open}

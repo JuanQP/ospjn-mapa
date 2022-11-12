@@ -1,6 +1,11 @@
 import { Marker, Popup } from "react-leaflet";
 
-export function DomicilioMarker({ provider, domicilio }) {
+interface Props {
+  provider: Provider;
+  domicilio: DomicilioWithLatLong
+}
+
+export function DomicilioMarker({ provider, domicilio }: Props) {
   return (
     <Marker position={[domicilio.latitud, domicilio.longitud]}>
       <Popup>

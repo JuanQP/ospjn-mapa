@@ -1,10 +1,7 @@
-import { Box, Link, Tooltip, Typography } from "@mui/material";
+import { hasLatLong } from "@/helpers";
 import MapIcon from '@mui/icons-material/Map';
 import NotListedLocationIcon from '@mui/icons-material/NotListedLocation';
-
-function hasLatLong(domicilio) {
-  return domicilio.latitud !== null && domicilio.longitud !== null;
-}
+import { Box, Link, Tooltip, Typography } from "@mui/material";
 
 function DomicilioMapIcon() {
   return <MapIcon color="primary" />;
@@ -22,7 +19,11 @@ function TooltipMapIcon() {
   );
 }
 
-export function ProviderDomicilio({ domicilio }) {
+interface Props {
+  domicilio: Domicilio;
+}
+
+export function ProviderDomicilio({ domicilio }: Props) {
 
   const localidad = domicilio.localidad ? `, ${domicilio.localidad.descripcion}` : null;
 

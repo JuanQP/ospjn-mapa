@@ -14,7 +14,13 @@ const styles = {
   }
 }
 
-export function ProviderDetailsModal({ provider, open, onClose }) {
+interface Props {
+  provider: Provider;
+  open: boolean;
+  onClose: () => void;
+}
+
+export function ProviderDetailsModal({ provider, open, onClose }: Props) {
   return (
     <Dialog
       open={open}

@@ -1,11 +1,12 @@
-import Grid from '@mui/material/Unstable_Grid2';
+import SearchIcon from '@mui/icons-material/Search';
 import LoadingButton from '@mui/lab/LoadingButton';
 import FormControl from '@mui/material/FormControl';
 import InputLabel from '@mui/material/InputLabel';
 import NativeSelect from '@mui/material/NativeSelect';
-import SearchIcon from '@mui/icons-material/Search';
+import Grid from '@mui/material/Unstable_Grid2';
+import { EspecialidadOption } from './types';
 
-const especialidades = [
+const especialidades: EspecialidadOption[] = [
   {id: 1076, label: "Acelerador Lineal"},
   {id: 1194, label: "Acompañante Terapeutico"},
   {id: 1001, label: "Adolescencia y Pubertad"},
@@ -208,10 +209,22 @@ const especialidades = [
   {id: 1075, label: "Urología Infantil"},
 ]
 
-function SearchForm({loading, defaultEspecialidad, onEspecialidadChange, onSearchClick}) {
+interface Props {
+  loading: boolean;
+  defaultEspecialidad: number;
+  onEspecialidadChange: (especialidadId: number) => void;
+  onSearchClick: () => void;
+}
 
-  function handleSelectChange(e) {
-    onEspecialidadChange(e.target.value);
+export function SearchForm({
+  loading,
+  defaultEspecialidad,
+  onEspecialidadChange,
+  onSearchClick
+}: Props) {
+
+  function handleSelectChange(e: React.ChangeEvent<HTMLSelectElement>) {
+    onEspecialidadChange(Number(e.target.value));
   }
 
   function handleSearchClick() {
@@ -253,5 +266,3 @@ function SearchForm({loading, defaultEspecialidad, onEspecialidadChange, onSearc
     </Grid>
   )
 }
-
-export default SearchForm;

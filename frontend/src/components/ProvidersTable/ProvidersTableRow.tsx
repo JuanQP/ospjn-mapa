@@ -1,14 +1,14 @@
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import ContactPhoneIcon from '@mui/icons-material/ContactPhone';
-import IconButton from '@mui/material/IconButton';
 import PhoneIcon from '@mui/icons-material/Phone';
-import { Stack, TableCell, TableRow, Typography } from '@mui/material';
-import { Box } from '@mui/system';
+import { Stack, TableCell, TableRow, Theme, Typography } from '@mui/material';
+import IconButton from '@mui/material/IconButton';
 import Grid from '@mui/material/Unstable_Grid2';
+import { Box } from '@mui/system';
 import { ProviderDomicilio } from './ProviderDomicilio';
 
 const styles = {
-  row: (theme) => ({
+  row: (theme: Theme) => ({
     verticalAlign: 'initial',
     '&:nth-of-type(odd)': {
       backgroundColor: theme.palette.action.hover,
@@ -19,7 +19,12 @@ const styles = {
   },
 }
 
-export function ProvidersTableRow({ provider, onProviderDetailClick }) {
+interface Props {
+  provider: Provider;
+  onProviderDetailClick: (provider: Provider) => void;
+}
+
+export function ProvidersTableRow({ provider, onProviderDetailClick }: Props) {
   return (
     <TableRow sx={styles.row}>
       <TableCell>
