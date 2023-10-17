@@ -10,14 +10,5 @@ export default defineConfig({
         { find: '@components', replacement: path.resolve(__dirname, './src/components')},
       ],
     },
-    server: {
-      proxy: {
-        '/api': {
-          target: 'http://localhost:3001/',
-          changeOrigin: true,
-          secure: false,
-        }
-      }
-    },
     plugins: [react()],
   });

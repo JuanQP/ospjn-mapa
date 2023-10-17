@@ -3,8 +3,12 @@ const express = require("express");
 const mongoose = require("mongoose");
 require('dotenv').config();
 
-mongoose.connect(process.env.DATABASE_URL).then(() =>{
+mongoose.connect(process.env.DATABASE_URL, { dbName: "ospjn" }).then(() =>{
   console.log("MongoDB connected!");
+}).catch((err) => {
+  console.error("Something went wrong with MongoDB connection...");
+  console.error(err);
+  process.exit(1);
 });
 
 const ProvinciaSchema = new mongoose.Schema({

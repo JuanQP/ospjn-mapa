@@ -1,0 +1,24 @@
+services:
+  app:
+    build: .
+    command: npm run start
+    environment:
+      - DATABASE_URL=mongodb://juan:juan@db:27017/
+      - PORT=3000
+    ports:
+      - 3000:3000
+
+  db:
+    image: mongo:7
+    volumes:
+      - mongo_data:/data/db
+      - ./docker-entrypoint-initdb.d/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+    environment:
+      - MONGO_INITDB_ROOT_USERNAME=juan
+      - MONGO_INITDB_ROOT_PASSWORD=juan
+      - MONGO_INITDB_DATABASE=ospjn
+    ports:
+      - 27017:27017
+
+volumes:
+  mongo_data:
